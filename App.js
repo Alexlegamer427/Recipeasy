@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, TouchableHighlight, ScrollView, Switch, Button, Text, TextInput,Pressable } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { RadioButton } from 'react-native-radio-buttons-group';
 import { Picker } from '@react-native-picker/picker';
+import RadioGroup from 'react-native-radio-buttons-group';
 
 
 
@@ -22,16 +22,15 @@ export default function App() {
         }
     ];
 
-
   return (
 
     
     <SafeAreaProvider>
       <SafeAreaView style={styles.baseContainer}>
           <View style={styles.centerBox}>
-               <Page1></Page1> 
+               {/* <Page1></Page1>  */}
                {/* <Page2></Page2>  */}
-              {/* <Page3></Page3> */}
+              <Page3></Page3>
 
           </View>
       </SafeAreaView>
@@ -71,10 +70,10 @@ function Page2() {
           
           <TextInput style={[styles.inputBox]} placeholderTextColor='#FFFFFF'  placeholder="Password" />
 
-          <TextInput style={[styles.inputBox]} placeholderTextColor='#FFFFFF'  placeholder="Password" />
+          <TextInput style={[styles.inputBox]} placeholderTextColor='#FFFFFF'  placeholder="Password Confirmation" />
 
           
-          <TouchableHighlight style={styles.mainButton} onPress={() => console.log('sign in')} underlayColor="#cc6600">
+          <TouchableHighlight style={styles.createAccountButton} onPress={() => console.log('sign in')} underlayColor="#cc6600">
                 <Text style={styles.buttonText}>Sign in</Text>
           </TouchableHighlight>
     </View>
@@ -82,12 +81,42 @@ function Page2() {
 }
 
 function Page3() {
+    const [selectedId, setSelectedId] = useState();
+     const radioButtons = [
+        {
+            id: '1',
+            label: 'Breakfast',
+            value: 'breakfast', 
+            color: '#FFFFFF', 
+            borderColor: '#FFFFFF'
+        },
+        {
+            id: '2',
+            label: 'Lunch',
+            value: 'lunch', 
+            color: '#FFFFFF', 
+            borderColor: '#FFFFFF'
+        },
+        {
+            id: '3',
+            label: 'Dinner',
+            value: 'dinner', 
+            color: '#FFFFFF', 
+            borderColor: '#FFFFFF'
+        }
+    ];
+
+
   return (
     <View>
       <View style={[styles.rowContainer]}>
-        <RadioButton >Breakfest</RadioButton>
-        <RadioButton  >Lunch</RadioButton>
-        <RadioButton >Diner</RadioButton>
+            <RadioGroup  
+                radioButtons={radioButtons} 
+                onPress={setSelectedId}
+                selectedId={selectedId}
+                layout='row'
+                labelStyle={{ color: '#FFFFFF' }}
+            />
       </View>
 
       <View>
@@ -163,8 +192,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
+    borderRadius: 10,
    
   },
+  createAccountButton : {
+    backgroundColor: '#ff8000',
+    marginVertical: 20, 
+    paddingHorizontal: 5,
+    width: '70%',
+    height: 45,
+    borderRadius: 10,
+    color: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
+
   buttonText : {
     color: '#FFFFFF',
     fontSize: 14,
