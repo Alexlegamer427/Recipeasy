@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, TouchableHighlight, ScrollView, Switch, Button, Text, TextInput } from 'react-native';
+import { StyleSheet, View, TouchableHighlight, ScrollView, Switch, Button, Text, TextInput,Pressable } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { RadioButton } from 'react-native-radio-buttons-group';
+import { Picker } from '@react-native-picker/picker';
+
+
+
 
 export default function App() {
    const options = [
@@ -17,12 +22,18 @@ export default function App() {
         }
     ];
 
+
   return (
 
     
     <SafeAreaProvider>
       <SafeAreaView style={styles.baseContainer}>
-            <Page1></Page1>
+          <View style={styles.centerBox}>
+               <Page1></Page1> 
+               {/* <Page2></Page2>  */}
+              {/* <Page3></Page3> */}
+
+          </View>
       </SafeAreaView>
     </SafeAreaProvider>
 
@@ -33,73 +44,145 @@ function Page1() {
     return (
      
       <View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ fontSize: 20, fontWeight: 'bold', marginRight: 10 }}>Recipeasy</Text>
-          </View>
 
-          <View>
-            <TextInput styles={styles.InputBox} ></TextInput>
-          </View>
-          <View>
-            <TextInput styles={styles.InputBox} ></TextInput>
-          </View>
+          <TextInput  style={[styles.inputBox]} placeholderTextColor='#FFFFFF' placeholder="Username" />
+          
+          <TextInput style={[styles.inputBox]} placeholderTextColor='#FFFFFF'  placeholder="Password" />
+          
+          <TouchableHighlight style={styles.login} onPress={() => console.log('sign in')} underlayColor="#f57f17">
+                <Text style={styles.buttonText}>Log in</Text>
+          </TouchableHighlight>
+
+          <Pressable onPress={() => console.log('lien cliqué')}>
+            <Text style={styles.link}>Sign up!</Text>
+          </Pressable>
+
       </View>
-        
-      
+
+
     );
  }
-
-  // function Page2() {
-  //   return (
-  //     <SafeAreaView>
-  //       <Text>Page 2</Text>
-  //     </SafeAreaView>
-  //   );
-  // }
-
-  // function Page3() {
-  //   return (
-  //     <SafeAreaView>
-  //       <Text>Page 3</Text>
-  //     </SafeAreaView>
-  //   );
-  // }
-
 } 
 
+function Page2() {
+  return (
+    <View>
+          <TextInput  style={[styles.inputBox]} placeholderTextColor='#FFFFFF' placeholder="Username" />
+          
+          <TextInput style={[styles.inputBox]} placeholderTextColor='#FFFFFF'  placeholder="Password" />
 
+          <TextInput style={[styles.inputBox]} placeholderTextColor='#FFFFFF'  placeholder="Password" />
 
+          
+          <TouchableHighlight style={styles.mainButton} onPress={() => console.log('sign in')} underlayColor="#cc6600">
+                <Text style={styles.buttonText}>Sign in</Text>
+          </TouchableHighlight>
+    </View>
+  );
+}
 
-//  Page 1
+function Page3() {
+  return (
+    <View>
+      <View style={[styles.rowContainer]}>
+        <RadioButton >Breakfest</RadioButton>
+        <RadioButton  >Lunch</RadioButton>
+        <RadioButton >Diner</RadioButton>
+      </View>
 
+      <View>
+        <TextInput></TextInput>
+      </View>
 
+      <View>
+        <Picker>
+            <Picker.Item label="1" value="1" />
+            <Picker.Item label="2" value="2" />
+        </Picker>
 
-//  Page 2 
+        <Picker>
+            <Picker.Item label="1" value="1" />
+            <Picker.Item label="2" value="2" />
+        </Picker>
 
+      </View>
 
+      <View>
 
-//  Page 3
+      </View>
 
+     
+      <Button title='ell' ></Button>
+      
+
+    </View>
+  );
+}
 
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#377f7e',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   baseContainer: {
     flexdirection: 'column',
     height: '100%',
-    with: '100%',
+    witdh: '100%',
+    backgroundColor: '#377f7e',
 
   },
-  InputBox : {
+  inputBox : {
+    width: 225,
+    maxWidth: '100%',
+    height: 45,
+    alignSelf: 'center',
+    textAlign: 'left',
+    borderWidth: 0.7,
+    borderColor: '#FFFFFF',
+    color: '#FFFFFF',
+    borderRadius: 2,
+    marginVertical: 20, 
+    paddingHorizontal: 10,
+   
+
+  },
+  centerBox : {
     flexDirection: 'row',
+    width: '100%',
+    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    flex: 1,
+    
+  },
+  login : {
+    backgroundColor: '#ff8000',
+    marginVertical: 20, 
+    paddingHorizontal: 5,
+    width: '30%',
+    height: 45,
+    color: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+   
+  },
+  buttonText : {
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  rowContainer : {
+     flexDirection: 'row', 
+     alignItems: 'center', 
+     justifyContent: 'center',
 
   },
+  link: {
+    color: '#5e03b9',
+    textDecorationLine: 'underline',
+    alignSelf: 'center',
+    marginVertical: 20, 
+    paddingHorizontal: 20,
+  },
+
+
 });
