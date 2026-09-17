@@ -28,9 +28,9 @@ export default function App() {
     <SafeAreaProvider>
       <SafeAreaView style={styles.baseContainer}>
           <View style={styles.centerBox}>
-               {/* <Page1></Page1>  */}
+               <Page1></Page1> 
                {/* <Page2></Page2>  */}
-              <Page3></Page3>
+              {/* <Page3></Page3> */}
 
           </View>
       </SafeAreaView>
@@ -108,7 +108,8 @@ function Page3() {
 
 
   return (
-    <View>
+    <View style={[styles.recipeContainer]}>
+
       <View style={[styles.rowContainer]}>
             <RadioGroup  
                 radioButtons={radioButtons} 
@@ -119,29 +120,34 @@ function Page3() {
             />
       </View>
 
-      <View>
-        <TextInput></TextInput>
+      <TextInput style={[styles.nameInputBox]} placeholderTextColor='#FFFFFF'  placeholder="Name" />
+     
+      <View style={styles.pickerRow}>
+          <Text style={styles.regulartext}>Duration</Text>
+          <Picker style={styles.picker}>
+              <Picker.Item label="0h" value="1" />
+              <Picker.Item label="1h" value="2" />
+          </Picker>
+
+          <Text style={styles.regulartext}> : </Text>
+
+          <Picker style={styles.picker}>
+              <Picker.Item label="0 mins" value="1" />
+              <Picker.Item label="1 mins" value="2" />
+          </Picker>
       </View>
 
-      <View>
-        <Picker>
-            <Picker.Item label="1" value="1" />
-            <Picker.Item label="2" value="2" />
-        </Picker>
-
-        <Picker>
-            <Picker.Item label="1" value="1" />
-            <Picker.Item label="2" value="2" />
-        </Picker>
-
-      </View>
-
-      <View>
-
-      </View>
+      <TextInput 
+        style={styles.descriptionInput} 
+        placeholder="Description"
+        placeholderTextColor='#FFFFFF'
+        multiline={true}
+      />
 
      
-      <Button title='ell' ></Button>
+      <TouchableHighlight style={styles.save} onPress={() => console.log('sign in')} underlayColor="#f57f17">
+                <Text style={styles.buttonText}>Save</Text>
+      </TouchableHighlight>
       
 
     </View>
@@ -172,6 +178,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
    
 
+  },
+  nameInputBox : {
+    width: '100%',
+    maxWidth: 300,
+    height: 45,
+    alignSelf: 'center',
+    textAlign: 'left',
+    borderWidth: 0.7,
+    borderColor: '#FFFFFF',
+    color: '#FFFFFF',
+    borderRadius: 2,
+    marginVertical: 20, 
+    paddingHorizontal: 10,
   },
   centerBox : {
     flexDirection: 'row',
@@ -207,6 +226,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
   },
+  save : {
+    backgroundColor: '#ff8000',
+    marginVertical: 20, 
+    paddingHorizontal: 5,
+    width: '30%',
+    height: 45,
+    color: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    borderRadius: 10,
+  },
 
   buttonText : {
     color: '#FFFFFF',
@@ -226,6 +257,49 @@ const styles = StyleSheet.create({
     marginVertical: 20, 
     paddingHorizontal: 20,
   },
+  pickerRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    gap: 3,
+   
+  },
+  picker: {
+      width: 95,
+      maxWidth: '100%',  
+      backgroundColor: 'transparent',
+      bordorColor: 'transparent',
+      color: '#FFFFFF',
+      
+  },
+   regulartext: {
+     color: '#FFFFFF',
+     fontSize: 14,
+     marginRight: 10,
+      
+  },
+  recipeContainer: {
+     
+    width: '100%',
+    maxWidth: 300,
+    height: '100%',      
+    flexDirection: 'column',
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    gap: 10,
+ 
+  },
+  descriptionInput: {
+    flex: 1,                   
+    width: '100%',
+    borderWidth: 0.7,
+    borderColor: '#FFFFFF',
+    color: '#FFFFFF',
+    borderRadius: 2,
+    padding: 10,
+    textAlignVertical: 'top',  
+},
 
 
 });
