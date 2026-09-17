@@ -9,34 +9,19 @@ import RadioGroup from 'react-native-radio-buttons-group';
 
 
 export default function App() {
-   const options = [
-        {
-            id: '1',
-            label: 'One',
-            value: '1'
-        },
-        {
-            id: '2',
-            label: 'Two',
-            value: '2'
-        }
-    ];
 
   return (
 
-    
     <SafeAreaProvider>
       <SafeAreaView style={styles.baseContainer}>
           <View style={styles.centerBox}>
                <Page1></Page1> 
                {/* <Page2></Page2>  */}
               {/* <Page3></Page3> */}
-
           </View>
       </SafeAreaView>
     </SafeAreaProvider>
 
-  
   );
  
 function Page1() {
@@ -49,7 +34,7 @@ function Page1() {
           <TextInput style={[styles.inputBox]} placeholderTextColor='#FFFFFF'  placeholder="Password" />
           
           <TouchableHighlight style={styles.login} onPress={() => console.log('sign in')} underlayColor="#f57f17">
-                <Text style={styles.buttonText}>Log in</Text>
+            <Text style={styles.buttonText}>Log in</Text>
           </TouchableHighlight>
 
           <Pressable onPress={() => console.log('lien cliqué')}>
@@ -58,13 +43,13 @@ function Page1() {
 
       </View>
 
-
     );
  }
 } 
 
 function Page2() {
   return (
+
     <View>
           <TextInput  style={[styles.inputBox]} placeholderTextColor='#FFFFFF' placeholder="Username" />
           
@@ -72,15 +57,17 @@ function Page2() {
 
           <TextInput style={[styles.inputBox]} placeholderTextColor='#FFFFFF'  placeholder="Password Confirmation" />
 
-          
           <TouchableHighlight style={styles.createAccountButton} onPress={() => console.log('sign in')} underlayColor="#cc6600">
-                <Text style={styles.buttonText}>Sign in</Text>
+            <Text style={styles.buttonText}>Sign in</Text>
           </TouchableHighlight>
     </View>
+
   );
 }
 
 function Page3() {
+
+    //a rajouter  un tableau pour simplifier + centraliser les modifs
     const [selectedId, setSelectedId] = useState();
      const radioButtons = [
         {
@@ -106,10 +93,9 @@ function Page3() {
         }
     ];
 
-
   return (
-    <View style={[styles.recipeContainer]}>
 
+    <View style={[styles.recipeContainer]}>
       <View style={[styles.rowContainer]}>
             <RadioGroup  
                 radioButtons={radioButtons} 
@@ -143,14 +129,12 @@ function Page3() {
         placeholderTextColor='#FFFFFF'
         multiline={true}
       />
-
-     
+ 
       <TouchableHighlight style={styles.save} onPress={() => console.log('sign in')} underlayColor="#f57f17">
-                <Text style={styles.buttonText}>Save</Text>
+        <Text style={styles.buttonText}>Save</Text>
       </TouchableHighlight>
-      
-
     </View>
+
   );
 }
 
