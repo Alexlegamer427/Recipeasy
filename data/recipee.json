@@ -1,0 +1,10 @@
+[
+  { 
+    "id": "1", 
+    "type": "breakfast", 
+    "name": "A0", 
+    "durationH": 0, 
+    "durationMin": 4, 
+    "description": "aa aaa aaaaaaa" 
+  }
+]

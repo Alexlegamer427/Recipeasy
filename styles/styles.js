@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     flexdirection: 'column',
     height: '100%',
     witdh: '100%',
-    backgroundColor: '#377f7e',
+   
 
   },
   inputBox : {
@@ -37,12 +37,13 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   centerBox : {
-    flexDirection: 'row',
+    flexDirection: 'column',
     width: '100%',
     height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
+    backgroundColor: '#377f7e',
     
   },
   login : {

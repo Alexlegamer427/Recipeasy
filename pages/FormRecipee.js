@@ -6,9 +6,14 @@ import { Picker } from '@react-native-picker/picker';
 import RadioGroup from 'react-native-radio-buttons-group';
 import {styles} from '../styles/styles.js'
 
-export default function FormRecipee() {
+export default function FormRecipee({navigation , route}) {
 
-    //a rajouter  un tableau pour simplifier + centraliser les modifs
+    const { mode, recipeId } = route.params || {}; 
+
+    const handleSave = () => {
+        navigation.navigate('RecipeListPage');
+    };
+
     const [selectedId, setSelectedId] = useState();
      const radioButtons = [
         {
@@ -71,7 +76,7 @@ export default function FormRecipee() {
                 multiline={true}
             />
         
-            <TouchableHighlight style={styles.save} onPress={() => console.log('sign in')} underlayColor="#f57f17">
+            <TouchableHighlight style={styles.save} onPress={handleSave} underlayColor="#f57f17">
                 <Text style={styles.buttonText}>Save</Text>
             </TouchableHighlight>
             </View>

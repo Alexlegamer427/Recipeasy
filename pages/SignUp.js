@@ -6,7 +6,7 @@
   import RadioGroup from 'react-native-radio-buttons-group';
   import {styles} from '../styles/styles.js'
 
-  export default function SignUpPage() {
+  export default function SignUpPage({navigation}) {
   return (
 
     <View style={styles.centerBox}>
@@ -16,9 +16,10 @@
 
           <TextInput style={[styles.inputBox]} placeholderTextColor='#FFFFFF'  placeholder="Password Confirmation" />
 
-          <TouchableHighlight style={styles.createAccountButton} onPress={() => console.log('sign up')} underlayColor="#cc6600">
-            <Text style={styles.buttonText}>Sign up</Text>
+          <TouchableHighlight style={styles.createAccountButton} onPress={() => navigation.navigate('ListRecipeePage') } underlayColor="#cc6600">
+            <Text style={styles.buttonText}>Sign up</Text> 
           </TouchableHighlight>
+          
     </View>
 
   );

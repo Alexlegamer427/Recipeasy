@@ -6,7 +6,7 @@ import { Picker } from '@react-native-picker/picker';
 import RadioGroup from 'react-native-radio-buttons-group';
 import {styles} from '../styles/styles.js'
 
-export default function SignInPage() {
+export default function SignInPage({navigation}) {
     return (
      
       <View style={styles.centerBox}>
@@ -15,11 +15,11 @@ export default function SignInPage() {
           
           <TextInput style={[styles.inputBox]} placeholderTextColor='#FFFFFF'  placeholder="Password" />
           
-          <TouchableHighlight style={styles.login} onPress={() => console.log('sign in')} underlayColor="#f57f17">
+          <TouchableHighlight style={styles.login} onPress={() => navigation.navigate('ListRecipeePage')} underlayColor="#f57f17">
             <Text style={styles.buttonText}>Log in</Text>
           </TouchableHighlight>
 
-          <Pressable onPress={() => console.log('lien cliqué')}>
+          <Pressable onPress={() => navigation.navigate('SignUpPage')}>
             <Text style={styles.link}>Sign up!</Text>
           </Pressable>
 
