@@ -19,16 +19,16 @@ export default function FormRecipee({navigation , route}) {
     const [description, setDescription] = useState(recipe?.description ?? '');
     const [error, setError] = useState('');
 
-    const hoursArray = Array.from({ length: 25 }, (_, i) => i);
+    const hoursArray = Array.from({ length: 13 }, (_, i) => i);
     const minutesArray = Array.from({ length: 60 }, (_, i) => i);
    
     const colorListText = '#000000';
     const whiteColor = '#FFFFFF';
 
     const radioButtons = [
-        { id: '1', label: 'Breakfast', value: '1', color: whiteColor, borderColor: whiteColor },
-        { id: '2', label: 'Lunch', value: '2', color: whiteColor, borderColor: whiteColor },
-        { id: '3', label: 'Dinner', value: '3', color: whiteColor, borderColor: whiteColor },
+        { id: '1', label: 'Breakfast', color: whiteColor, borderColor: whiteColor },
+        { id: '2', label: 'Lunch', color: whiteColor, borderColor: whiteColor },
+        { id: '3', label: 'Dinner', color: whiteColor, borderColor: whiteColor },
     ];
 
     const validate = () => {

@@ -8,14 +8,17 @@
   import { useFocusEffect } from '@react-navigation/native';
 
   export default function SignUpPage({navigation}) {
+
+    const TextColor = '#FFFFFF';
+
   return (
 
     <View style={styles.centerBox}>
-          <TextInput  style={[styles.inputBox]} placeholderTextColor='#FFFFFF' placeholder="Username" />
+          <TextInput  style={[styles.inputBox]} placeholderTextColor={TextColor} placeholder="Username" />
           
-          <TextInput style={[styles.inputBox]} placeholderTextColor='#FFFFFF'  placeholder="Password" />
+          <TextInput style={[styles.inputBox]} placeholderTextColor={TextColor}  placeholder="Password" />
 
-          <TextInput style={[styles.inputBox]} placeholderTextColor='#FFFFFF'  placeholder="Password Confirmation" />
+          <TextInput style={[styles.inputBox]} placeholderTextColor={TextColor}  placeholder="Password Confirmation" />
 
           <TouchableHighlight style={styles.createAccountButton} onPress={() => navigation.navigate('ListRecipeePage') } underlayColor="#cc6600">
             <Text style={styles.buttonText}>Sign up</Text> 

@@ -9,6 +9,8 @@
 
   export default function ListRecipeePage({navigation,route}) {
 
+     const TextColor = '#FFFFFF';
+
     const [recipes, setRecipes] = useState([
         {category: 1, name: 'A0', durationHours: 0, durationMinutes: 4, description: 'aa aaa aaaaaaa' },
         {category: 2, name: 'B0', durationHours: 1, durationMinutes: 30, description: 'bb bbbb b bbb b bbbbh' },
@@ -42,15 +44,21 @@
   return (
 
     <View style={styles.centerBox}>
-          <TouchableHighlight underlayColor="#cc6600"  onPress={handleAdd}>
-            <Text style={styles.buttonText}>+</Text>
-          </TouchableHighlight>
-          <TouchableHighlight underlayColor="#cc6600"  onPress={handleView}>
-            <Text style={styles.buttonText}>View</Text>
-          </TouchableHighlight>
-          <Text style={{ color: '#FFFFFF' }}>
-                {JSON.stringify(sortedRecipes)}
+      <View style={styles.listContent}>
+          <Text style={{ color: TextColor }}>
+              {JSON.stringify(sortedRecipes)}
           </Text>
+      </View>
+
+      <View style={styles.bottomBar}>
+          <TouchableHighlight style={styles.roundButton } underlayColor="#cc6600" onPress={handleView}>
+              <Text style={styles.buttonText}>View</Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight style={styles.roundButton } underlayColor="#cc6600" onPress={handleAdd}>
+              <Text style={styles.buttonText}>+</Text>
+          </TouchableHighlight>
+      </View>
     </View>
 
   );

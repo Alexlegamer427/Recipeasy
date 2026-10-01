@@ -8,13 +8,16 @@ import {styles} from '../styles/styles.js'
 import { useFocusEffect } from '@react-navigation/native';
 
 export default function SignInPage({navigation}) {
+
+    const TextColor = '#FFFFFF';
+
     return (
      
       <View style={styles.centerBox}>
 
-          <TextInput  style={[styles.inputBox]} placeholderTextColor='#FFFFFF' placeholder="Username" />
+          <TextInput  style={[styles.inputBox]} placeholderTextColor={TextColor} placeholder="Username" />
           
-          <TextInput style={[styles.inputBox]} placeholderTextColor='#FFFFFF'  placeholder="Password" />
+          <TextInput style={[styles.inputBox]} placeholderTextColor={TextColor}  placeholder="Password" />
           
           <TouchableHighlight style={styles.login} onPress={() => navigation.navigate('ListRecipeePage')} underlayColor="#f57f17">
             <Text style={styles.buttonText}>Log in</Text>
