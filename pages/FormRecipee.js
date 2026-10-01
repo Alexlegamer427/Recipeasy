@@ -1,21 +1,18 @@
-import { useState, useCallback } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, TouchableHighlight, ScrollView, Switch, Button, Text, TextInput,Pressable } from 'react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { useState } from 'react';
+import { View, TouchableHighlight, Text, TextInput } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import RadioGroup from 'react-native-radio-buttons-group';
 import {styles} from '../styles/styles.js'
-import { useFocusEffect } from '@react-navigation/native';
 
 export default function FormRecipee({navigation , route}) {
 
     const { mode, recipe } = route.params || {};
     const isEdit = mode === 'edit';
 
-    const [selectedId, setSelectedId] = useState();
+    const [selectedId, setSelectedId] = useState(recipe?.category?.toString() ?? null);
     const [name, setName] = useState(recipe?.name ?? '');
-    const [hours, setHours] = useState(0);
-    const [minutes, setMinutes] = useState(0);
+    const [hours, setHours] = useState(recipe?.durationHours ?? 0);
+    const [minutes, setMinutes] = useState(recipe?.durationMinutes ?? 0);
     const [description, setDescription] = useState(recipe?.description ?? '');
     const [error, setError] = useState('');
 
@@ -55,16 +52,17 @@ export default function FormRecipee({navigation , route}) {
             description,
         };
 
-        navigation.navigate('ListRecipeePage', { newRecipe });
+        navigation.navigate('ListRecipee', { newRecipe });
     };
 
     const handleDelete = () => {
-        navigation.navigate('ListRecipeePage'); 
+        navigation.navigate('ListRecipee'); 
     };
 
   return (
     <View style={styles.centerBox}>
         <View style={[styles.recipeContainer]}>
+
             <View style={[styles.rowContainer]}>
                     <RadioGroup  
                         radioButtons={radioButtons} 
@@ -84,7 +82,9 @@ export default function FormRecipee({navigation , route}) {
             />
             
             <View style={styles.pickerRow}>
+
                 <Text style={styles.regulartext}>Duration</Text>
+
                 <Picker 
                     style={styles.picker}
                     selectedValue={hours}
@@ -106,6 +106,7 @@ export default function FormRecipee({navigation , route}) {
                         <Picker.Item key={m} label={`${m} mins`} value={m} color={colorListText} />
                     ))}
                 </Picker>
+
             </View>
 
             <TextInput 
@@ -133,6 +134,5 @@ export default function FormRecipee({navigation , route}) {
 
             </View>
     </View>
-
   );
 }

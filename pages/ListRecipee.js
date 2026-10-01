@@ -1,15 +1,12 @@
   import { useState , useCallback} from 'react';
   import { StatusBar } from 'expo-status-bar';
   import { StyleSheet, View, TouchableHighlight, ScrollView, Switch, Button, Text, TextInput,Pressable } from 'react-native';
-  import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-  import { Picker } from '@react-native-picker/picker';
   import { useFocusEffect } from '@react-navigation/native';
-  import RadioGroup from 'react-native-radio-buttons-group';
   import {styles} from '../styles/styles.js'
 
-  export default function ListRecipeePage({navigation,route}) {
+  export default function ListRecipee({navigation,route}) {
 
-     const TextColor = '#FFFFFF';
+    const TextColor = '#FFFFFF';
 
     const [recipes, setRecipes] = useState([
         {category: 1, name: 'A0', durationHours: 0, durationMinutes: 4, description: 'aa aaa aaaaaaa' },
@@ -45,12 +42,15 @@
 
     <View style={styles.centerBox}>
       <View style={styles.listContent}>
+
           <Text style={{ color: TextColor }}>
               {JSON.stringify(sortedRecipes)}
           </Text>
+
       </View>
 
       <View style={styles.bottomBar}>
+
           <TouchableHighlight style={styles.roundButton } underlayColor="#cc6600" onPress={handleView}>
               <Text style={styles.buttonText}>View</Text>
           </TouchableHighlight>
@@ -58,6 +58,7 @@
           <TouchableHighlight style={styles.roundButton } underlayColor="#cc6600" onPress={handleAdd}>
               <Text style={styles.buttonText}>+</Text>
           </TouchableHighlight>
+
       </View>
     </View>
 

@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
     height: '100%',
     witdh: '100%',
    
-
   },
   inputBox : {
     width: 225,
