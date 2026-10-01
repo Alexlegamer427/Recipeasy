@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, TouchableHighlight, ScrollView, Switch, Button, Text, TextInput,Pressable } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
@@ -6,13 +6,13 @@ import { Picker } from '@react-native-picker/picker';
 import RadioGroup from 'react-native-radio-buttons-group';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useFocusEffect } from '@react-navigation/native';
 import SignInPage  from './pages/SignIn.js';
 import FormRecipee  from './pages/FormRecipee.js';
 import ListRecipeePage from './pages/ListRecipee.js';
 import SignUpPage from './pages/SignUp.js';
 
 import {styles} from './styles/styles.js'
-
 
 const Stack = createNativeStackNavigator();
 
@@ -35,7 +35,8 @@ export default function App() {
                 <Stack.Screen name="SignInPage" component={ SignInPage  } />
                 <Stack.Screen name="SignUpPage" component={ SignUpPage  } />
                 <Stack.Screen name="FormRecipee" component={ FormRecipee  } />
-                <Stack.Screen name="ListRecipeePage" component={ ListRecipeePage  } options={({ navigation }) => ({
+                <Stack.Screen name="ListRecipeePage" component={ ListRecipeePage  } 
+                  options={({ navigation }) => ({
                       headerRight: () => (
                           <Pressable 
                               onPress={() => navigation.reset({ index: 0, routes: [{ name: 'SignInPage' }] })}
@@ -48,8 +49,6 @@ export default function App() {
                   })} 
                 />
                
-                
-
               </Stack.Navigator>
             </NavigationContainer>
       </SafeAreaView>
