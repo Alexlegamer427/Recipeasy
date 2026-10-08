@@ -155,8 +155,8 @@ listContent: {
 },
 bottomBar: {
     flexDirection: 'row',
-    justifyContent: 'space-between',  
-    alignItems: 'center',
+    justifyContent: 'flex-end', 
+    alignItems: 'center',       
     width: '100%',
     paddingHorizontal: 20,
     paddingVertical: 15,
@@ -213,6 +213,11 @@ separator: {
     width: '100%',
 },
 iconSpacing: {
+    marginRight: 12,
+},
+recipeIconColumn: {
+    alignItems: 'center',
+    width: 45,
     marginRight: 12,
 },
 

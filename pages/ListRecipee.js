@@ -2,26 +2,11 @@
   import {  View, TouchableHighlight, Text, FlatList,Pressable  } from 'react-native';
   import { useFocusEffect } from '@react-navigation/native';
   import {styles} from '../styles/styles.js'
-  import { Ionicons, MaterialCommunityIcons ,MaterialIcons} from '@expo/vector-icons';
+  import RecipeItem from '../components/RecipeeItem.js';
 
   export default function ListRecipee({navigation,route}) {
 
     const TextColor = '#FFFFFF';
-    const breakfastColor = '#ff8000';
-    const dinnerColor = '#2196f3';
-    const lunchColor = '#4caf50';
-
-    const categoryIcons = {
-        1: { lib: Ionicons, name: 'cafe' },                    
-        2: { lib: MaterialCommunityIcons, name: 'hamburger' }, 
-        3: { lib: MaterialIcons, name: 'dinner-dining' },  
-    };
-
-    const formatDuration = (hours, minutes) => {
-        const paddedMinutes = minutes.toString().padStart(2, '0');
-        return `${hours}h${paddedMinutes}`;
-    };
-
 
     const [recipes, setRecipes] = useState([
         { category: 1, name: 'A0', durationHours: 0, durationMinutes: 4, description: 'aa aaa aaaaaaa' },
@@ -57,51 +42,6 @@
         navigation.navigate('FormRecipee');
     };
 
-
-    const renderItem = ({ item }) => {
-        const iconName = categoryIcons[item.category].name;
-        const IconComponent = categoryIcons[item.category].lib;
-
-        return (
-            <Pressable
-                onPress={() => navigation.navigate('FormRecipee', { recipe: item })}
-                style={({ pressed }) => [
-                    styles.recipeItem,
-                    { opacity: pressed ? 0.6 : 1 }
-                ]}
-            >
-                <View>
-
-                    <IconComponent 
-                        name={iconName}
-                        size={28} 
-                        color={item.category === 1 ? breakfastColor : item.category === 2 ? lunchColor : dinnerColor}
-                        style={styles.iconSpacing }
-                    />
-                    <Text style={styles.recipeDuration}>
-                                {formatDuration(item.durationHours, item.durationMinutes)}
-                    </Text>
-
-                </View>
-
-                <View style={styles.recipeItemText}>
-
-                    <View style={styles.recipeItemHeader}>
-
-                        <Text style={styles.recipeName} numberOfLines={1}>{item.name}</Text>
-                        
-                    </View>
-
-                    <Text style={styles.recipeDescription} numberOfLines={1}>
-                        {item.description}
-                    </Text>
-
-                </View>
-        
-            </Pressable>
-        );
-    };
-
   return (
 
     <View style={styles.centerBox}>
@@ -111,24 +51,23 @@
             <FlatList
                 data={sortedRecipes}
                 keyExtractor={(item, index) => `${item.name}-${index}`}
-                renderItem={renderItem}
+                renderItem={({ item }) => (
+                    <RecipeItem 
+                        recipe={item} 
+                        onPress={() => navigation.navigate('FormRecipee', { recipe: item })}
+                    />
+                )}
                 ItemSeparatorComponent={() => <View style={styles.separator} />}
                 ListEmptyComponent={() => (
-
-                    <Text style={{ color: TextColor, textAlign: 'center', alignSelf: 'center'}}>
+                    <Text style={{ color: TextColor, textAlign: 'center', marginTop: 20 }}>
                         Aucune recette pour l'instant
                     </Text>
-
                 )}
             />
 
         </View>
 
       <View style={styles.bottomBar}>
-
-          <TouchableHighlight style={styles.roundButton } underlayColor="#cc6600" onPress={handleView}>
-              <Text style={styles.buttonText}>View</Text>
-          </TouchableHighlight>
 
           <TouchableHighlight style={styles.roundButton } underlayColor="#cc6600" onPress={handleAdd}>
               <Text style={styles.buttonText}>+</Text>
