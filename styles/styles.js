@@ -220,6 +220,14 @@ recipeIconColumn: {
     width: 45,
     marginRight: 12,
 },
-
+emptyListContainer: {
+    flex: 1,
+    justifyContent: 'center',  
+    alignItems: 'center',       
+},
+emptyListText: {
+    color: '#FFFFFF',
+    textAlign: 'center',
+},
 
 });

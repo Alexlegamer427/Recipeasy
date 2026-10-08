@@ -16,7 +16,6 @@
         { category: 2, name: 'B1', durationHours: 1, durationMinutes: 30, description: 'eeeeeee' },
     ]);
 
-
     useFocusEffect(
         useCallback(() => {
             const newRecipe = route.params?.newRecipe;
@@ -49,20 +48,31 @@
         <View style={styles.listContent}>
 
             <FlatList
+
                 data={sortedRecipes}
+
                 keyExtractor={(item, index) => `${item.name}-${index}`}
+
                 renderItem={({ item }) => (
                     <RecipeItem 
                         recipe={item} 
                         onPress={() => navigation.navigate('FormRecipee', { recipe: item })}
                     />
                 )}
+
                 ItemSeparatorComponent={() => <View style={styles.separator} />}
+
                 ListEmptyComponent={() => (
-                    <Text style={{ color: TextColor, textAlign: 'center', marginTop: 20 }}>
-                        Aucune recette pour l'instant
-                    </Text>
+            
+                    <View style={styles.emptyListContainer}>
+                        <Text style={styles.emptyListText}>
+                            Aucune recette pour l'instant
+                        </Text>
+                    </View>
+
                 )}
+
+                contentContainerStyle={{ flexGrow: 1 }}
             />
 
         </View>
