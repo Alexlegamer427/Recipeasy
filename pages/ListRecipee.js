@@ -2,16 +2,16 @@
   import {  View, TouchableHighlight, Text, FlatList,Pressable  } from 'react-native';
   import { useFocusEffect } from '@react-navigation/native';
   import {styles} from '../styles/styles.js'
-  import { Ionicons } from '@expo/vector-icons';
+  import { Ionicons, MaterialCommunityIcons ,MaterialIcons} from '@expo/vector-icons';
 
   export default function ListRecipee({navigation,route}) {
 
     const TextColor = '#FFFFFF';
 
     const categoryIcons = {
-        1: 'egg-outline',      
-        2: 'fast-food-outline', 
-        3: 'restaurant-outline', 
+        1: { lib: Ionicons, name: 'cafe' },                    
+        2: { lib: MaterialCommunityIcons, name: 'hamburger' }, 
+        3: { lib: MaterialIcons, name: 'dinner-dining' },  
     };
 
     const formatDuration = (hours, minutes) => {
@@ -53,7 +53,12 @@
         navigation.navigate('FormRecipee');
     };
 
-    const renderItem = ({ item }) => (
+
+    const renderItem = ({ item }) => {
+        const iconName = categoryIcons[item.category].name;
+        const IconComponent = categoryIcons[item.category].lib;
+
+        return (
             <Pressable
                 onPress={() => navigation.navigate('FormRecipee', { recipe: item })}
                 style={({ pressed }) => [
@@ -61,10 +66,10 @@
                     { opacity: pressed ? 0.6 : 1 }
                 ]}
             >
-                <Ionicons 
-                    name={categoryIcons[item.category]} 
+                <IconComponent 
+                    name={iconName}
                     size={28} 
-                    color="#FFFFFF" 
+                    color={item.category === 1 ? '#ff8000' : item.category === 2 ? '#4caf50' : '#2196f3'}
                     style={{ marginRight: 12 }}
                 />
 
@@ -81,6 +86,7 @@
                 </View>
             </Pressable>
         );
+    };
 
   return (
 
