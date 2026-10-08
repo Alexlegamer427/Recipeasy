@@ -10,9 +10,10 @@
 
     const [recipes, setRecipes] = useState([
         { category: 1, name: 'A0', durationHours: 0, durationMinutes: 4, description: 'aa aaa aaaaaaa' },
+        { category: 2, name: 'A1', durationHours: 0, durationMinutes: 4, description: 'aa aaa aaaaaaa' },
         { category: 2, name: 'B0', durationHours: 1, durationMinutes: 30, description: 'ffffff' },
         { category: 3, name: 'C0', durationHours: 1, durationMinutes: 30, description: ' cc' },
-        { category: 1, name: 'A1', durationHours: 0, durationMinutes: 4, description: 'zzaaa' },
+        { category: 1, name: 'A2', durationHours: 0, durationMinutes: 4, description: 'zzaaa' },
         { category: 2, name: 'B1', durationHours: 1, durationMinutes: 30, description: 'eeeeeee' },
     ]);
 

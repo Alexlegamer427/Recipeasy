@@ -17,15 +17,19 @@ const formatDuration = (hours, minutes) => {
 };
 
 export default function RecipeItem({ recipe, onPress }) {
+
     const iconName = categoryIcons[recipe.category].name;
+
     const IconComponent = categoryIcons[recipe.category].lib;
 
     return (
         <Pressable
+
             onPress={onPress}
+
             style={({ pressed }) => [
                 styles.recipeItem,
-                { opacity: pressed ? 0.6 : 1 }
+                pressed && { backgroundColor: 'rgba(255, 255, 255, 0.7)' }
             ]}
         >
             <View style={styles.recipeIconColumn}>
