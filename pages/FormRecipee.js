@@ -7,7 +7,8 @@ import ToastManager, { Toast } from 'toastify-react-native'
 
 export default function FormRecipee({navigation , route}) {
 
-    const { mode, recipe } = route.params || {};
+   const { recipe } = route.params || {};
+    const isEdit = recipe !== undefined;
 
     const [recipeData, setRecipeData] = useState({
         category: recipe?.category?.toString() ?? null,
@@ -20,14 +21,6 @@ export default function FormRecipee({navigation , route}) {
     const updateField = (field, value) => {
         setRecipeData(prev => ({ ...prev, [field]: value }));
     };
-
-    const isEdit = mode === 'edit'; 
-
-    const [selectedId, setSelectedId] = useState(recipe?.category?.toString() ?? null);
-    const [name, setName] = useState(recipe?.name ?? '');
-    const [hours, setHours] = useState(recipe?.durationHours ?? 0);
-    const [minutes, setMinutes] = useState(recipe?.durationMinutes ?? 0);
-    const [description, setDescription] = useState(recipe?.description ?? '');
 
     const hoursArray = Array.from({ length: 13 }, (_, i) => i);
     const minutesArray = Array.from({ length: 60 }, (_, i) => i);
