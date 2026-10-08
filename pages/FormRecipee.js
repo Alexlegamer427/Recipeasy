@@ -7,15 +7,21 @@ import ToastManager, { Toast } from 'toastify-react-native'
 
 export default function FormRecipee({navigation , route}) {
 
-   const { recipe } = route.params || {};
+    const { recipe } = route.params || {};
     const isEdit = recipe !== undefined;
 
     const [recipeData, setRecipeData] = useState({
+
         category: recipe?.category?.toString() ?? null,
+
         name: recipe?.name ?? '',
+
         durationHours: recipe?.durationHours ?? 0,
+
         durationMinutes: recipe?.durationMinutes ?? 0,
+
         description: recipe?.description ?? '',
+
     });
 
     const updateField = (field, value) => {
@@ -25,7 +31,6 @@ export default function FormRecipee({navigation , route}) {
     const hoursArray = Array.from({ length: 13 }, (_, i) => i);
     const minutesArray = Array.from({ length: 60 }, (_, i) => i);
 
-   
     const colorListText = '#000000';
     const whiteColor = '#FFFFFF';
 
@@ -35,34 +40,46 @@ export default function FormRecipee({navigation , route}) {
         { id: '3', label: 'Dinner', color: whiteColor, borderColor: whiteColor },
     ];
     const validate = () => {
+
         let messages = '';
 
-        if (!recipeData.category) messages += 'Catégorie requise\n';
+        if (!recipeData.category) messages += 'Category required\n';
 
-        if (!recipeData.name.trim()) messages += 'Nom requis\n';
+        if (!recipeData.name.trim()) messages += 'Name required\n';
 
-        if (recipeData.durationHours < 0 || recipeData.durationHours > 12) messages += 'Heures doivent être entre 0 et 12\n';
+        if (recipeData.durationHours < 0 || recipeData.durationHours > 12) messages += 'Hours must be in between 0 and 12\n';
 
-        if (recipeData.durationMinutes < 0 || recipeData.durationMinutes > 59) messages += 'Minutes doivent être entre 0 et 59\n';
+        if (recipeData.durationMinutes < 0 || recipeData.durationMinutes > 59) messages += 'Minutes must be in between 0 and 59\n';
 
-        if (recipeData.durationHours === 0 && recipeData.durationMinutes === 0) messages += 'Durée doit être supérieure à 0\n';
+        if (recipeData.durationHours === 0 && recipeData.durationMinutes === 0) messages += 'Duration must be higher than 0\n';
 
         return messages === '' ? null : messages;
+
     };
 
     const handleSave = () => {
+
         const validationError = validate();
+
         if (validationError) {
+
             Toast.error(validationError);
             return;
+
         }
 
         const newRecipe = {
+
             category: parseInt(recipeData.category),
+
             name: recipeData.name,
+
             durationHours: recipeData.durationHours,
+
             durationMinutes: recipeData.durationMinutes,
+
             description: recipeData.description,
+
         };
 
         navigation.navigate('ListRecipee', { newRecipe });
@@ -74,10 +91,13 @@ export default function FormRecipee({navigation , route}) {
 
   return (
     <View style={styles.centerBox}>
+
         <ToastManager />
+
         <View style={[styles.recipeContainer]}>
 
             <View style={[styles.rowContainer]}>
+
                     <RadioGroup  
                         radioButtons={radioButtons} 
                         onPress={(id) => updateField('category', id)}
@@ -96,7 +116,6 @@ export default function FormRecipee({navigation , route}) {
             />
             
             <View style={styles.pickerRow}>
-
                 <Text style={styles.regulartext}>Duration</Text>
 
                 <Picker 
