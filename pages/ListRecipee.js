@@ -88,7 +88,7 @@
 
                     <View style={styles.recipeItemHeader}>
 
-                        <Text style={styles.recipeName}>{item.name}</Text>
+                        <Text style={styles.recipeName} numberOfLines={1}>{item.name}</Text>
                         
                     </View>
 
@@ -115,10 +115,10 @@
                 ItemSeparatorComponent={() => <View style={styles.separator} />}
                 ListEmptyComponent={() => (
 
-                    <Text style={{ color: TextColor, textAlign: 'center', marginTop: 20 }}>
+                    <Text style={{ color: TextColor, textAlign: 'center', alignSelf: 'center'}}>
                         Aucune recette pour l'instant
                     </Text>
-                    
+
                 )}
             />
 
