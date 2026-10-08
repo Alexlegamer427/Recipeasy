@@ -3,21 +3,35 @@ import { View, TouchableHighlight, Text, TextInput } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import RadioGroup from 'react-native-radio-buttons-group';
 import {styles} from '../styles/styles.js'
+import ToastManager, { Toast } from 'toastify-react-native'
 
 export default function FormRecipee({navigation , route}) {
 
     const { mode, recipe } = route.params || {};
-    const isEdit = mode === 'edit';
+
+    const [recipeData, setRecipeData] = useState({
+        category: recipe?.category?.toString() ?? null,
+        name: recipe?.name ?? '',
+        durationHours: recipe?.durationHours ?? 0,
+        durationMinutes: recipe?.durationMinutes ?? 0,
+        description: recipe?.description ?? '',
+    });
+
+    const updateField = (field, value) => {
+        setRecipeData(prev => ({ ...prev, [field]: value }));
+    };
+
+    const isEdit = mode === 'edit'; 
 
     const [selectedId, setSelectedId] = useState(recipe?.category?.toString() ?? null);
     const [name, setName] = useState(recipe?.name ?? '');
     const [hours, setHours] = useState(recipe?.durationHours ?? 0);
     const [minutes, setMinutes] = useState(recipe?.durationMinutes ?? 0);
     const [description, setDescription] = useState(recipe?.description ?? '');
-    const [error, setError] = useState('');
 
     const hoursArray = Array.from({ length: 13 }, (_, i) => i);
     const minutesArray = Array.from({ length: 60 }, (_, i) => i);
+
    
     const colorListText = '#000000';
     const whiteColor = '#FFFFFF';
@@ -27,29 +41,35 @@ export default function FormRecipee({navigation , route}) {
         { id: '2', label: 'Lunch', color: whiteColor, borderColor: whiteColor },
         { id: '3', label: 'Dinner', color: whiteColor, borderColor: whiteColor },
     ];
-
     const validate = () => {
-        if (!selectedId) return 'Catégorie requise';
-        if (!name.trim()) return 'Nom requis';
-        if (hours < 0 || hours > 12) return 'Heures doivent être entre 0 et 12';
-        if (minutes < 0 || minutes > 59) return 'Minutes doivent être entre 0 et 59';
-        if (hours === 0 && minutes === 0) return 'Durée doit être supérieure à 0';
-        return null;
+        let messages = '';
+
+        if (!recipeData.category) messages += 'Catégorie requise\n';
+
+        if (!recipeData.name.trim()) messages += 'Nom requis\n';
+
+        if (recipeData.durationHours < 0 || recipeData.durationHours > 12) messages += 'Heures doivent être entre 0 et 12\n';
+
+        if (recipeData.durationMinutes < 0 || recipeData.durationMinutes > 59) messages += 'Minutes doivent être entre 0 et 59\n';
+
+        if (recipeData.durationHours === 0 && recipeData.durationMinutes === 0) messages += 'Durée doit être supérieure à 0\n';
+
+        return messages === '' ? null : messages;
     };
 
     const handleSave = () => {
         const validationError = validate();
         if (validationError) {
-            setError(validationError);
+            Toast.error(validationError);
             return;
         }
 
         const newRecipe = {
-            category: parseInt(selectedId),
-            name,
-            durationHours: hours,
-            durationMinutes: minutes,
-            description,
+            category: parseInt(recipeData.category),
+            name: recipeData.name,
+            durationHours: recipeData.durationHours,
+            durationMinutes: recipeData.durationMinutes,
+            description: recipeData.description,
         };
 
         navigation.navigate('ListRecipee', { newRecipe });
@@ -61,13 +81,14 @@ export default function FormRecipee({navigation , route}) {
 
   return (
     <View style={styles.centerBox}>
+        <ToastManager />
         <View style={[styles.recipeContainer]}>
 
             <View style={[styles.rowContainer]}>
                     <RadioGroup  
                         radioButtons={radioButtons} 
-                        onPress={setSelectedId}
-                        selectedId={selectedId}
+                        onPress={(id) => updateField('category', id)}
+                        selectedId={recipeData.category}
                         layout='row'
                         labelStyle={{ color: '#FFFFFF' }}
                     />
@@ -77,8 +98,8 @@ export default function FormRecipee({navigation , route}) {
                 style={[styles.nameInputBox]} 
                 placeholderTextColor='#FFFFFF'  
                 placeholder="Name"                 
-                value={name}
-                onChangeText={setName}
+                value={recipeData.name}
+                onChangeText={(text) => updateField('name', text)}
             />
             
             <View style={styles.pickerRow}>
@@ -87,8 +108,8 @@ export default function FormRecipee({navigation , route}) {
 
                 <Picker 
                     style={styles.picker}
-                    selectedValue={hours}
-                    onValueChange={(value) => setHours(value)}
+                    selectedValue={recipeData.durationHours}
+                    onValueChange={(value) => updateField('durationHours', value)}
                 >
                     {hoursArray.map((h) => (
                         <Picker.Item key={h} label={`${h}h`} value={h} color={colorListText} />
@@ -99,8 +120,8 @@ export default function FormRecipee({navigation , route}) {
 
                 <Picker 
                     style={styles.picker}
-                    selectedValue={minutes}
-                    onValueChange={(value) => setMinutes(value)}
+                    selectedValue={recipeData.durationMinutes}
+                    onValueChange={(value) => updateField('durationMinutes', value)}
                 >
                     {minutesArray.map((m) => (
                         <Picker.Item key={m} label={`${m} mins`} value={m} color={colorListText} />
@@ -112,13 +133,11 @@ export default function FormRecipee({navigation , route}) {
             <TextInput 
                 style={styles.descriptionInput} 
                 placeholder="Description"
-                value={description}
-                onChangeText={setDescription}
+                value={recipeData.description}
+                onChangeText={(text) => updateField('description', text)}
                 placeholderTextColor='#FFFFFF'
                 multiline={true}
             />
-        
-            {error ? <Text style={{ color: 'red' }}>{error}</Text> : null}
 
             {!isEdit && (
                 <TouchableHighlight style={styles.save} onPress={handleSave} underlayColor="#f57f17">

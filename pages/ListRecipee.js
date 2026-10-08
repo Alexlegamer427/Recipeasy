@@ -31,11 +31,11 @@
             return;
         }
         const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)];
-        navigation.navigate('FormRecipee', { mode: 'edit', recipe: randomRecipe });
+        navigation.navigate('FormRecipee', {recipe: randomRecipe });
     };
 
     const handleAdd = () => {
-        navigation.navigate('FormRecipee', { mode: 'add' });
+        navigation.navigate('FormRecipee');
     };
   
   return (
