@@ -7,10 +7,10 @@
   export default function ListRecipee({navigation,route}) {
 
     const [recipes, setRecipes] = useState([
-        { category: 1, name: 'A0', durationHours: 0, durationMinutes: 4, description: 'aa aaa aaaaaaa' },
-        { category: 2, name: 'A1', durationHours: 0, durationMinutes: 4, description: 'aa aaa aaaaaaa' },
+        { category: 1, name: 'A0', durationHours: 0, durationMinutes: 4, description: 'aa aaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' },
+        { category: 2, name: 'A33333333333333333333333333333333333333333333', durationHours: 0, durationMinutes: 4, description: 'aa aaa aaaaaaa' },
         { category: 2, name: 'B0', durationHours: 1, durationMinutes: 30, description: 'ffffff' },
-        { category: 3, name: 'C0', durationHours: 1, durationMinutes: 30, description: ' cc' },
+        { category: 3, name: 'C0', durationHours: 1, durationMinutes: 30, description: ' ' },
         { category: 1, name: 'A2', durationHours: 0, durationMinutes: 4, description: 'zzaaa' },
         { category: 2, name: 'B1', durationHours: 1, durationMinutes: 30, description: 'eeeeeee' },
     ]);
