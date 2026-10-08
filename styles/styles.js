@@ -172,5 +172,49 @@ roundButton: {
   alignItems: 'center',
   alignSelf: 'center',   
 },
+listContent: {
+    flex: 1,
+    width: '100%',
+
+},
+recipeItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 15,
+    width: '100%',
+},
+recipeItemText: {
+    flex: 1,   // prend tout l'espace restant après l'icône
+},
+recipeItemHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
+},
+recipeName: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 16,
+},
+recipeDuration: {
+    color: '#FFFFFF',
+    fontSize: 13,
+},
+recipeDescription: {
+    color: '#cceee8',   // gris-blanc légèrement atténué, comme sur ton image
+    fontSize: 13,
+    marginTop: 2,
+},
+separator: {
+    height: 1,
+    backgroundColor: '#FFFFFF',
+    opacity: 0.3,
+    width: '100%',
+},
+iconSpacing: {
+    marginRight: 12,
+},
+
 
 });

@@ -7,6 +7,9 @@
   export default function ListRecipee({navigation,route}) {
 
     const TextColor = '#FFFFFF';
+    const breakfastColor = '#ff8000';
+    const dinnerColor = '#2196f3';
+    const lunchColor = '#4caf50';
 
     const categoryIcons = {
         1: { lib: Ionicons, name: 'cafe' },                    
@@ -28,6 +31,7 @@
         { category: 2, name: 'B1', durationHours: 1, durationMinutes: 30, description: 'eeeeeee' },
     ]);
 
+
     useFocusEffect(
         useCallback(() => {
             const newRecipe = route.params?.newRecipe;
@@ -40,7 +44,7 @@
 
     const sortedRecipes = [...recipes].sort((a, b) => a.name.localeCompare(b.name));
 
-        const handleView = () => {
+    const handleView = () => {
         if (recipes.length == 0) {
             console.log('Aucune recette à afficher');
             return;
@@ -66,24 +70,34 @@
                     { opacity: pressed ? 0.6 : 1 }
                 ]}
             >
-                <IconComponent 
-                    name={iconName}
-                    size={28} 
-                    color={item.category === 1 ? '#ff8000' : item.category === 2 ? '#4caf50' : '#2196f3'}
-                    style={{ marginRight: 12 }}
-                />
+                <View>
+
+                    <IconComponent 
+                        name={iconName}
+                        size={28} 
+                        color={item.category === 1 ? breakfastColor : item.category === 2 ? lunchColor : dinnerColor}
+                        style={styles.iconSpacing }
+                    />
+                    <Text style={styles.recipeDuration}>
+                                {formatDuration(item.durationHours, item.durationMinutes)}
+                    </Text>
+
+                </View>
 
                 <View style={styles.recipeItemText}>
+
                     <View style={styles.recipeItemHeader}>
+
                         <Text style={styles.recipeName}>{item.name}</Text>
-                        <Text style={styles.recipeDuration}>
-                            {formatDuration(item.durationHours, item.durationMinutes)}
-                        </Text>
+                        
                     </View>
+
                     <Text style={styles.recipeDescription} numberOfLines={1}>
                         {item.description}
                     </Text>
+
                 </View>
+        
             </Pressable>
         );
     };
@@ -91,18 +105,23 @@
   return (
 
     <View style={styles.centerBox}>
+
         <View style={styles.listContent}>
+
             <FlatList
                 data={sortedRecipes}
                 keyExtractor={(item, index) => `${item.name}-${index}`}
                 renderItem={renderItem}
                 ItemSeparatorComponent={() => <View style={styles.separator} />}
                 ListEmptyComponent={() => (
+
                     <Text style={{ color: TextColor, textAlign: 'center', marginTop: 20 }}>
                         Aucune recette pour l'instant
                     </Text>
+                    
                 )}
             />
+
         </View>
 
       <View style={styles.bottomBar}>
@@ -116,6 +135,7 @@
           </TouchableHighlight>
 
       </View>
+
     </View>
 
   );
